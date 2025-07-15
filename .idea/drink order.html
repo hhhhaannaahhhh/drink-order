@@ -9,8 +9,16 @@
 <h1>What drink would you like?</h1>
 <canvas id="orderBox" width="500" height="300"></canvas>
 <script>
+    //constants for the canvas
     const canvas = document.getElementById("orderBox");
     const ctx = canvas.getContext("2d");
+    //list of drinks
+    const drinks = [
+        {name: "Coffee", imageSrc: "coffee.png", x: 20, y: 30},
+        {name: "Latte", imageSrc: "latte.png", x: 140, y: 30},
+        {name: "Tea", imageSrc: "tea.png", x: 260, y: 30},
+        {name: "Smoothie", imageSrc: "smoothie.png", x: 380, y: 30}
+    ];
 
 
 </script>
