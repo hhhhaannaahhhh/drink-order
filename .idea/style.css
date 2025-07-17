@@ -8,5 +8,6 @@ h1 {
 
 }
 canvas{
-    color: #ffda99;
+    border: 2px black;
+    background-color: #ffda99;
 }

@@ -14,11 +14,38 @@
     const ctx = canvas.getContext("2d");
     //list of drinks
     const drinks = [
-        {name: "Coffee", imageSrc: "coffee.png", x: 20, y: 30},
-        {name: "Latte", imageSrc: "latte.png", x: 140, y: 30},
-        {name: "Tea", imageSrc: "tea.png", x: 260, y: 30},
-        {name: "Smoothie", imageSrc: "smoothie.png", x: 380, y: 30}
+        {name: "Coffee", imageSrc: "assets/coffee.png", x: 20, y: 30},
+        {name: "Latte", imageSrc: "assets/latte.png", x: 140, y: 30},
+        {name: "Tea", imageSrc: "assets/tea.png", x: 260, y: 30},
+        {name: "Smoothie", imageSrc: "assets/smoothie.png", x: 380, y: 30}
     ];
+    const images = {};
+    let imageLoaded = 0;
+
+    function drinkImg(){
+        drinks.forEach(function(drink){
+            const img = images[drink.name];
+            if (img.complete) {
+                ctx.drawImage(img, drink.x, drink.y, 80, 80);
+                ctx.font = "12px Verdana";
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.fillText(drink.name, drink.x + 40, drink.y + 90);
+            }
+        });
+    }
+    drinks.forEach(function(drink) {
+        const img = new Image();
+        img.src = drink.imageSrc;
+        images[drink.name] = img;
+        img.onload = () => {
+            imageLoaded++;
+            if (imageLoaded === drinks.length){
+                drinkImg();
+            }
+        }
+    });
+
 
 
 </script>
