@@ -19,9 +19,11 @@
         {name: "Tea", imageSrc: "assets/tea.png", x: 260, y: 30},
         {name: "Smoothie", imageSrc: "assets/smoothie.png", x: 380, y: 30}
     ];
+    //hold the images
     const images = {};
     let imageLoaded = 0;
-
+//function for the drinks names underneath the images
+    // TODO: Make the text a bit lower than the images and more centered underneath the image
     function drinkImg(){
         drinks.forEach(function(drink){
             const img = images[drink.name];
@@ -34,6 +36,7 @@
             }
         });
     }
+    // this draws the images onto the canvas
     drinks.forEach(function(drink) {
         const img = new Image();
         img.src = drink.imageSrc;
@@ -47,7 +50,3 @@
     });
 
 
-
-</script>
-</body>
-</html>
