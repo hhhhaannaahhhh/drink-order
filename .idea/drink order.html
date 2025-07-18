@@ -28,7 +28,6 @@
     const images = {};
     let imageLoaded = 0;
 //function for the drinks names underneath the images
-    // TODO: Make the text a bit lower than the images and more centered underneath the image
     function drinkImg(){
         drinks.forEach(function(drink){
             const img = images[drink.name];
@@ -37,7 +36,7 @@
                 ctx.font = "12px Verdana";
                 ctx.fillStyle = "black";
                 ctx.textAlign = "center";
-                ctx.fillText(drink.name, drink.x + 40, drink.y + 90);
+                ctx.fillText(drink.name, drink.x + 30, drink.y + 100);
             }
         });
     }
@@ -56,7 +55,7 @@
 
     //event to make the drinks clickable
     // TODO: Have this move onto the milk alts after they are clicked will need to research how to do this
-    canvas.addEventListener("click", function (event){
+    /*canvas.addEventListener("click", function (event){
         const rect = canvas.getBoundingClientRect(); //figure out canvas location
         const click1 = event.click1 - rect.left;
         const click2 = event.click 2 - rect.top;
@@ -66,7 +65,7 @@
             ){}
         })
     })
-
+*/
 </script>
 </body>
 </html>
