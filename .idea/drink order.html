@@ -53,19 +53,50 @@
         }
     });
 
+    //write out the order below the canvas for good user interaction
+    const orderList = {
+        name: "",
+        drink: null,
+        milk: null,
+        extras: []
+    };
+    const orderSum = document.createElement("div");
+    orderSum.id = "orderSum";
+    document.body.appendChild(orderSum);
+    function addOrderSum(){
+        const userName = document.querySelector("input[type='text']");
+        orderList.name = userName.value;
+
+        let html = "<h3> Your order: </h3> <ul>";
+        if (orderList.name) html += "<li> <strong>Name:</strong> ${orderList.name}</li>";
+        if (orderList.drink) html += "<li><strong>Drink:</strong> ${orderList.drink}</li>";
+        if (orderList.milk) html += "<li><strong>Milk:</strong> ${orderList.milk}</li>";
+        if (orderList.extras.length > 0) {
+            orderList.extras.forEach(function (extra){
+                html += "<li><strong>Extras:</strong> ${extras}</li>";
+            });
+        }
+        html += "</ul>";
+        orderSum.innerHTML = html;
+
+    }
+
     //event to make the drinks clickable
-    // TODO: Have this move onto the milk alts after they are clicked will need to research how to do this
-    /*canvas.addEventListener("click", function (event){
+    // TODO: This is not working need to find the issues
+    canvas.addEventListener("click", function (event){
         const rect = canvas.getBoundingClientRect(); //figure out canvas location
         const click1 = event.click1 - rect.left;
-        const click2 = event.click 2 - rect.top;
+        const click2 = event.click2 - rect.top;
         drinks.forEach(function (drink){
             if (
-                click1 >= drink.x && click1 <= drink.x + 80 && click2 >= drink.y && click2 >= drink.y + 80
-            ){}
-        })
-    })
-*/
+                click1 >= drink.x && click1 <= drink.x + 80 &&
+                click2 >= drink.y && click2 >= drink.y + 80
+            ){
+            orderSum.drink = drink.name;
+            milks()
+            }
+        });
+    });
 </script>
 </body>
 </html>
