@@ -9,9 +9,12 @@
 <h1>What drink would you like?</h1>
 <form>
     <p> What's your name?</p>
-    <input type="text" placeholder="Hannah">
+    <input type="text" id="userName" placeholder="Hannah">
 </form>
 <canvas id="orderBox" width="500" height="300"></canvas>
+<div id = "orderSum">
+    <h3> Your order:</h3>
+</div>
 <script>
     //TODO: add a function to collect the order and list the order below the canvas
     //constants for the canvas
@@ -60,23 +63,22 @@
         milk: null,
         extras: []
     };
-    const orderSum = document.createElement("div");
+    const orderSum = document.getElementById("orderSum");
     orderSum.id = "orderSum";
-    document.body.appendChild(orderSum);
     function addOrderSum(){
-        const userName = document.querySelector("input[type='text']");
+        const userName = document.getElementById("userName").value;
         orderList.name = userName.value;
 
-        let html = "<h3> Your order: </h3> <ul>";
-        if (orderList.name) html += "<li> <strong>Name:</strong> ${orderList.name}</li>";
-        if (orderList.drink) html += "<li><strong>Drink:</strong> ${orderList.drink}</li>";
-        if (orderList.milk) html += "<li><strong>Milk:</strong> ${orderList.milk}</li>";
+        let html = `<h3> Your order: </h3> <ul>`;
+        if (orderList.name) html += `<li> <strong>Name:</strong> ${orderList.name}</li>`;
+        if (orderList.drink) html += `<li><strong>Drink:</strong> ${orderList.drink}</li>`;
+        if (orderList.milk) html += `<li><strong>Milk:</strong> ${orderList.milk}</li>`;
         if (orderList.extras.length > 0) {
             orderList.extras.forEach(function (extra){
-                html += "<li><strong>Extras:</strong> ${extras}</li>";
+                html += `<li><strong>Extras:</strong> ${extra}</li>`;
             });
         }
-        html += "</ul>";
+        html += `</ul>`;
         orderSum.innerHTML = html;
 
     }
@@ -85,18 +87,52 @@
     // TODO: This is not working need to find the issues
     canvas.addEventListener("click", function (event){
         const rect = canvas.getBoundingClientRect(); //figure out canvas location
-        const click1 = event.click1 - rect.left;
-        const click2 = event.click2 - rect.top;
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
         drinks.forEach(function (drink){
             if (
-                click1 >= drink.x && click1 <= drink.x + 80 &&
-                click2 >= drink.y && click2 >= drink.y + 80
+                clickX >= drink.x && clickX <= drink.x + 80 &&
+                clickY >= drink.y && clickY <= drink.y + 80
             ){
-            orderSum.drink = drink.name;
-            milks()
+            orderList.drink = drink.name;
+            addOrderSum();
+            milkExtras();
             }
         });
     });
+    // milk options write similar to drinks
+    const milks = [
+        {name: "Whole", imageSrc : "assets/milk.png", x: 20, y: 30},
+        {name: "Oat", imageSrc: "assets/oatmilk.png", x: 140, y: 30},
+        {name: "Almond", imageSrc: "assets/almond.png", x: 260, y: 30}
+    ];
+    function milkExtras(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        milks.forEach(function (milk){
+            const milkImg = images[milk.name];
+            if (milkImg.complete){
+                ctx.drawImage(milkImg, milk.x, milk.y, 80, 80);
+                ctx.font = "12px Verdana";
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.fillText(milk.name, milk.x + 30, milk.y + 100);
+            }
+        });
+    }
+    milks.forEach(function (milk){
+        const milkImg = new Image();
+        milkImg.src = milk.imageSrc;
+        images[milk.name] = milkImg;
+        milkImg.onload = () => {
+            imageLoaded++;
+            if (imageLoaded === milks.length){
+                drinkImg();
+            }
+        }
+    });
+
+
 </script>
 </body>
 </html>
