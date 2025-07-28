@@ -103,7 +103,6 @@
             }
         });
     });
-    // TODO: switching to milk images properly however when trying to click milk it thinks its the drinks
     // milk options write similar to drinks
     const milks = [
         {name: "Whole", imageSrc : "assets/milk.png", x: 20, y: 30},
@@ -135,7 +134,6 @@
             }
         }
     });
-    // TODO: clicks are overlapping need to fix
     canvas.addEventListener("click", function (event){
         if (currentScreen !== "milks") return;
         const rect = canvas.getBoundingClientRect();
@@ -151,6 +149,14 @@
             }
         });
     });
+    // TODO: clicks not overlapping when on milks but are when drinks are up might need to switch to just one event w switch case
+    // extras same to milk and drinks dont have images yet
+    /* const extras = [
+        {name: "Hot" },
+        {name : "Iced"},
+        {name: "flavors"},
+    ]
+    */
 
 
 
