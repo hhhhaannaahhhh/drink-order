@@ -16,7 +16,6 @@
     <h3> Your order:</h3>
 </div>
 <script>
-    //TODO: add a function to collect the order and list the order below the canvas
     //constants for the canvas
     const canvas = document.getElementById("orderBox");
     const ctx = canvas.getContext("2d");
@@ -63,6 +62,7 @@
         milk: null,
         extras: []
     };
+    // TODO: name form is not working properly and not showing under the order
     const orderSum = document.getElementById("orderSum");
     orderSum.id = "orderSum";
     function addOrderSum(){
@@ -84,7 +84,6 @@
     }
 
     //event to make the drinks clickable
-    // TODO: This is not working need to find the issues
     canvas.addEventListener("click", function (event){
         const rect = canvas.getBoundingClientRect(); //figure out canvas location
         const clickX = event.clientX - rect.left;
@@ -100,6 +99,7 @@
             }
         });
     });
+    // TODO: switching to milk images properly however when trying to click milk it thinks its the drinks
     // milk options write similar to drinks
     const milks = [
         {name: "Whole", imageSrc : "assets/milk.png", x: 20, y: 30},
@@ -127,10 +127,26 @@
         milkImg.onload = () => {
             imageLoaded++;
             if (imageLoaded === milks.length){
-                drinkImg();
+                milkImg();
             }
         }
     });
+    canvas.addEventListener("click", function (event){
+        const rect = canvas.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
+        milks.forEach(function (milk){
+            if (
+                clickX >= milk.x && clickX <= milk.x + 80 &&
+                clickY >= milk.y && clickY <= milk.y + 80
+            ){
+                orderList.milk = milk.name;
+                addOrderSum();
+            }
+        });
+    });
+
+
 
 
 </script>
