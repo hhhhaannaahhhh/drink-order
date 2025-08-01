@@ -82,27 +82,7 @@
         orderSum.innerHTML = html;
 
     }
-    // track which images are up on the screen to stop clicks overlapping
-    let currentScreen = "drinks"
-    //event to make the drinks clickable
-    canvas.addEventListener("click", function (event){
-        if (currentScreen !== "drinks") return;
-        const rect = canvas.getBoundingClientRect(); //figure out canvas location
-        const clickX = event.clientX - rect.left;
-        const clickY = event.clientY - rect.top;
-        drinks.forEach(function (drink){
-            if (
-                clickX >= drink.x && clickX <= drink.x + 80 &&
-                clickY >= drink.y && clickY <= drink.y + 80
-            ){
-            orderList.drink = drink.name;
 
-            addOrderSum();
-            currentScreen = "milks"
-            milkExtras();
-            }
-        });
-    });
     // milk options write similar to drinks
     const milks = [
         {name: "Whole", imageSrc : "assets/milk.png", x: 20, y: 30},
@@ -134,20 +114,37 @@
             }
         }
     });
-    canvas.addEventListener("click", function (event){
-        if (currentScreen !== "milks") return;
-        const rect = canvas.getBoundingClientRect();
+
+    // track which images are up on the screen to stop clicks overlapping
+    let currentScreen = "drinks"
+    //event to make the drinks clickable
+    canvas.addEventListener("click", function (event) {
+        const rect = canvas.getBoundingClientRect(); //figure out canvas location
         const clickX = event.clientX - rect.left;
         const clickY = event.clientY - rect.top;
-        milks.forEach(function (milk){
+        if (currentScreen == "drinks") {
+        drinks.forEach(function (drink) {
             if (
-                clickX >= milk.x && clickX <= milk.x + 80 &&
-                clickY >= milk.y && clickY <= milk.y + 80
-            ){
-                orderList.milk = milk.name;
+                clickX >= drink.x && clickX <= drink.x + 80 &&
+                clickY >= drink.y && clickY <= drink.y + 80
+            ) {
+                orderList.drink = drink.name;
                 addOrderSum();
+                currentScreen = "milks"
+                milkExtras();
             }
         });
+    } else if (currentScreen == "milks") {
+            milks.forEach(function (milk){
+                if (
+                    clickX >= milk.x && clickX <= milk.x + 80 &&
+                    clickY >= milk.y && clickY <= milk.y + 80
+                ){
+                    orderList.milk = milk.name;
+                    addOrderSum();
+                }
+            });
+        }
     });
     // TODO: clicks not overlapping when on milks but are when drinks are up might need to switch to just one event w switch case
     // extras same to milk and drinks dont have images yet
