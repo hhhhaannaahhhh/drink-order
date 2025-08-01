@@ -146,13 +146,35 @@
             });
         }
     });
-    // TODO: clicks not overlapping when on milks but are when drinks are up might need to switch to just one event w switch case
-    // extras same to milk and drinks dont have images yet
+    // extras same to milk and drinks dont have images yet so commented out
     /* const extras = [
-        {name: "Hot" },
-        {name : "Iced"},
-        {name: "flavors"},
-    ]
+        {name: "Hot", imageSrc: "assets/hot.png", x : 20, y: 30},
+        {name : "Iced", imageSrc: "assets/iced.png", x: 140, y: 30},
+        {name: "Flavors", imageSrc: "assets/flavors.png", x: 260, y: 30}
+    ];
+    function extras(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    extras.forEach(funtion (extra){
+        const extraImg = images[extra.name]
+        if (extraImg.complete){
+        ctx.drawImage(extraImg, extra.x, extra.y, 80, 80);
+        ctx.font = "12px Verdana";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.fillText(extra.name, extra.x + 30, extra.y + 100);
+        }
+     });
+    }
+    milks.forEach(function (extra){
+        const extraImg = new Image();
+        extraImg.src = extra.imageSrc;
+        images[extra.name] = () => {
+            imageLoaded++;
+            if (imageLoaded === extras.length) {
+            extraImg();
+            }
+        }
+    });
     */
 
 
