@@ -66,8 +66,7 @@
     const orderSum = document.getElementById("orderSum");
     orderSum.id = "orderSum";
     function addOrderSum(){
-        const userName = document.getElementById("userName").value;
-        orderList.name = userName.value;
+        orderList.name = document.getElementById("userName").value;
 
         let html = `<h3> Your order: </h3> <ul>`;
         if (orderList.name) html += `<li> <strong>Name:</strong> ${orderList.name}</li>`;
@@ -144,7 +143,15 @@
                     addOrderSum();
                 }
             });
-        }
+        } /* else if (currentScreen == "extras") {
+            extras.forEach(function (extra){
+            if (
+                clickX >= extra.x && clickX <= extra.x + 80 &&
+                clickY >= extra.y && clickY <= extra.y + 80
+                ){
+                orderList.extra = extra.name;
+                addOrderSum();}
+        } */
     });
     // extras same to milk and drinks dont have images yet so commented out
     /* const extras = [
@@ -165,7 +172,7 @@
         }
      });
     }
-    milks.forEach(function (extra){
+    extras.forEach(function (extra){
         const extraImg = new Image();
         extraImg.src = extra.imageSrc;
         images[extra.name] = () => {
