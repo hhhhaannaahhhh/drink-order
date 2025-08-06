@@ -18,6 +18,8 @@ After the milk is selected the page will then show a selection of extras the use
 While the user is selecting their order, text will appear showing the order back to them below the order box.  
 
 ## References  
+For assets: Looked up reference images of pixel art but made the art myself using an app called Pixel Studio on Steam  
+
 
 
 

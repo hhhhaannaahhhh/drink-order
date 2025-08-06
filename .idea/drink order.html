@@ -47,7 +47,7 @@
         const img = new Image();
         img.src = drink.imageSrc;
         images[drink.name] = img;
-        img.onload = () => {
+        img.onload = function(){
             imageLoaded++;
             if (imageLoaded === drinks.length){
                 drinkImg();
@@ -106,13 +106,79 @@
         const milkImg = new Image();
         milkImg.src = milk.imageSrc;
         images[milk.name] = milkImg;
-        milkImg.onload = () => {
+        milkImg.onload = function(){
             imageLoaded++;
             if (imageLoaded === milks.length){
                 milkImg();
             }
         }
     });
+
+    // extras same to milk and drinks dont have images yet so commented out
+    const extras = [
+        {name: "Hot", imageSrc: "assets/hot.png", x : 20, y: 30},
+        {name : "Iced", imageSrc: "assets/iced.png", x: 140, y: 30},
+        {name: "Flavors", imageSrc: "assets/flavors.png", x: 260, y: 30}
+    ];
+    function drinkExtra(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        extras.forEach(function (extra){
+            const extraImg = images[extra.name]
+            if (extraImg.complete){
+                ctx.drawImage(extraImg, extra.x, extra.y, 80, 80);
+                ctx.font = "12px Verdana";
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.fillText(extra.name, extra.x + 30, extra.y + 100);
+            }
+        });
+    }
+    extras.forEach(function (extra){
+        const extraImg = new Image();
+        extraImg.src = extra.imageSrc;
+        images[extra.name] = extraImg;
+        extraImg.onload = function(){
+            imageLoaded++;
+            if (imageLoaded === extras.length) {
+                extraImg();
+            }
+        }
+    });
+
+    // different extras for smoothie
+    const smoothies = [
+        {name: "Banana", imageSrc: "assets/banana.png", x: 20, y: 30},
+        {name: "Cherry", imageSrc: "assets/cherry.png", x: 140, y: 30},
+        {name: "Strawberry", imageSrc: "assets/strawberry.png", x: 260, y: 30}
+    ];
+
+    function smoothieExtras() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        smoothies.forEach(function (smoothie) {
+            const smoothieExtraImg = images[smoothie.name];
+            if (smoothieExtraImg.complete) {
+                ctx.drawImage(smoothieExtraImg, smoothie.x, smoothie.y, 80, 80);
+                ctx.font = "12px Verdana";
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.fillText(smoothie.name, smoothie.x + 30, smoothie.y + 100);
+            }
+        });
+    }
+    smoothies.forEach(function (smoothie){
+        const smoothieExtraImg = new Image();
+        smoothieExtraImg.src = smoothie.imageSrc;
+        images[smoothie.name] = smoothieExtraImg;
+        smoothieExtraImg.onload = function(){
+            imageLoaded++;
+            if (imageLoaded === smoothieExtras.length){
+                smoothieExtraImg();
+            }
+        }
+    });
+
+
 
     // track which images are up on the screen to stop clicks overlapping
     let currentScreen = "drinks"
@@ -141,48 +207,52 @@
                 ){
                     orderList.milk = milk.name;
                     addOrderSum();
+                    if (orderList.drink === "Smoothie" ){
+                        smoothieExtras();
+                        currentScreen = "smoothie"
+                    } else {
+                        drinkExtra();
+                        currentScreen = "extras"
+                    }
+
+
                 }
             });
-        } /* else if (currentScreen == "extras") {
-            extras.forEach(function (extra){
-            if (
-                clickX >= extra.x && clickX <= extra.x + 80 &&
-                clickY >= extra.y && clickY <= extra.y + 80
+        }  else if (currentScreen == "extras") {
+            extras.forEach(function (extra) {
+                if (
+                    clickX >= extra.x && clickX <= extra.x + 80 &&
+                    clickY >= extra.y && clickY <= extra.y + 80
+                ) {
+                    orderList.extra = extra.name;
+                    addOrderSum();
+                }
+            });
+        } else if (currentScreen == "smoothie"){
+            smoothies.forEach(function (smoothieExtra){
+                if (
+                    clickX >= smoothieExtra.x && clickX <= smoothieExtra.x + 80 &&
+                    clickY >= smoothieExtra.y && clickY <= smoothieExtra.y + 80
                 ){
-                orderList.extra = extra.name;
-                addOrderSum();}
-        } */
-    });
-    // extras same to milk and drinks dont have images yet so commented out
-    /* const extras = [
-        {name: "Hot", imageSrc: "assets/hot.png", x : 20, y: 30},
-        {name : "Iced", imageSrc: "assets/iced.png", x: 140, y: 30},
-        {name: "Flavors", imageSrc: "assets/flavors.png", x: 260, y: 30}
-    ];
-    function extras(){
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    extras.forEach(funtion (extra){
-        const extraImg = images[extra.name]
-        if (extraImg.complete){
-        ctx.drawImage(extraImg, extra.x, extra.y, 80, 80);
-        ctx.font = "12px Verdana";
-        ctx.fillStyle = "black";
-        ctx.textAlign = "center";
-        ctx.fillText(extra.name, extra.x + 30, extra.y + 100);
+                    orderList.extra = smoothieExtra.name;
+                    addOrderSum();
+                }
+            })
         }
-     });
-    }
-    extras.forEach(function (extra){
-        const extraImg = new Image();
-        extraImg.src = extra.imageSrc;
-        images[extra.name] = () => {
-            imageLoaded++;
-            if (imageLoaded === extras.length) {
-            extraImg();
-            }
-        }
-    });
-    */
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
