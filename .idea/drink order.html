@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>What drink would you like?</h1>
+<button id="staff">Staff</button>
 <form>
     <p> What's your name?</p>
     <input type="text" id="userName" placeholder="Hannah">
@@ -15,6 +16,7 @@
 <div id = "orderSum">
     <h3> Your order:</h3>
 </div>
+<button id="submitOrder">Submit Order</button>
 <script>
     //constants for the canvas
     const canvas = document.getElementById("orderBox");
@@ -62,7 +64,6 @@
         milk: null,
         extras: []
     };
-    // TODO: name form is not working properly and not showing under the order
     const orderSum = document.getElementById("orderSum");
     orderSum.id = "orderSum";
     function addOrderSum(){
@@ -224,7 +225,7 @@
                     clickX >= extra.x && clickX <= extra.x + 80 &&
                     clickY >= extra.y && clickY <= extra.y + 80
                 ) {
-                    orderList.extra = extra.name;
+                    orderList.extras.push(extra.name);
                     addOrderSum();
                 }
             });
@@ -234,11 +235,25 @@
                     clickX >= smoothieExtra.x && clickX <= smoothieExtra.x + 80 &&
                     clickY >= smoothieExtra.y && clickY <= smoothieExtra.y + 80
                 ){
-                    orderList.extra = smoothieExtra.name;
+                    orderList.extras = smoothieExtra.name;
                     addOrderSum();
                 }
             })
         }
+        const submitOrder = document.getElementById("submitOrder");
+        // send order to php to add to database
+        function submitOrderButton(){
+            fetch("submit_order.php",{
+               method: "POST",
+                   headers: {
+                   "Content-Type": "application/json"
+                },
+               body: JSON.stringify(orderList)
+            });
+        }
+        submitOrder.addEventListener("click",submitOrderButton);
+
+
         });
 
 
