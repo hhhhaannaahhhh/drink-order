@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json');
 // connect to databse
 $host = "db.dcs.aber.ac.uk";
 $dbname ="cs25320_24_25_haf31";
@@ -19,8 +20,13 @@ if (isset($data['extras'])) {
 // connect to database
 $conn_string ="host = $host dbname=$dbname user=$user password=$password";
 $db =pg_connect($conn_string);
-$result = pg_query_params(
-    $db, "INSERT INTO orders (customer_name, customer_drink, drink_milk, extras) VALUES ($1, $2, $3, $4)",
-    array($name, $drink, $milk, $extras)
-);
+$sql = "INSERT INTO orders (customer_name, customer_drink, drink_milk, drink_extras, order_finished)
+VALUES ($1, $2, $3, $4, FALSE)";
+$result = pg_query_params($db, $sql, [$name, $drink, $milk, $extras]);
+if ($result){
+    echo json_encode([
+        'status' => 'completed',
+        'message' => 'order saved'
+    ]);
+}
 pg_close($db);

@@ -8,8 +8,9 @@
 <body>
 <h1>What drink would you like?</h1>
 <button id="staff">Staff</button>
+<div id="staffView" style="display: none"></div>
 <form>
-    <p> What's your name?</p>
+    <p id="whatsYourName"> What's your name?</p>
     <input type="text" id="userName" placeholder="Hannah">
 </form>
 <canvas id="orderBox" width="500" height="300"></canvas>
@@ -118,8 +119,10 @@
     // extras same to milk and drinks dont have images yet so commented out
     const extras = [
         {name: "Hot", imageSrc: "assets/hot.png", x : 20, y: 30},
-        {name : "Iced", imageSrc: "assets/iced.png", x: 140, y: 30},
-        {name: "Flavors", imageSrc: "assets/flavors.png", x: 260, y: 30}
+        {name : "Iced", imageSrc: "assets/iced.png", x: 120, y: 30},
+        {name: "Caramel", imageSrc: "assets/caramel.png", x: 220, y: 30},
+        {name: "Mocha", imageSrc: "assets/mocha.png", x: 320, y: 30},
+        {name: "Vanilla", imageSrc: "assets/vanilla.png", x: 420, y: 30}
     ];
     function drinkExtra(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -235,39 +238,83 @@
                     clickX >= smoothieExtra.x && clickX <= smoothieExtra.x + 80 &&
                     clickY >= smoothieExtra.y && clickY <= smoothieExtra.y + 80
                 ){
-                    orderList.extras = smoothieExtra.name;
+                    orderList.extras.push(smoothieExtra.name);
                     addOrderSum();
                 }
             })
         }
-        const submitOrder = document.getElementById("submitOrder");
-        // send order to php to add to database
-        function submitOrderButton(){
-            fetch("submit_order.php",{
-               method: "POST",
-                   headers: {
-                   "Content-Type": "application/json"
-                },
-               body: JSON.stringify(orderList)
-            });
-        }
-        submitOrder.addEventListener("click",submitOrderButton);
-
 
         });
+    // submit order and send to databse
+    const submitOrder = document.getElementById("submitOrder");
+    // send order to php to add to database
+    function submitOrderButton(){
+        fetch("submit_order.php",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(orderList)
+        });
+    }
+    submitOrder.addEventListener("click",submitOrderButton);
 
+    //staff view
+    const staffButton = document.getElementById("staff");
+    const staffView = document.getElementById("staffView");
+    const orderCanvas = document.getElementById("orderBox");
+    const orderSummary = document.getElementById("orderSum");
+    const customerName = document.getElementById("userName");
+    const nameText = document.getElementById("whatsYourName");
+    // hides other things on the screen to show the staff view
+    staffButton.addEventListener("click", function (){
+        orderCanvas.style.display = "none";
+        submitOrder.style.display = "none";
+        orderSummary.style.display = "none";
+        customerName.style.display = "none";
+        nameText.style.display = "none";
+        staffView.style.display = "block";
+        showOrders();
+    });
+    // GET data from the submit orders
+    function showOrders(){
+       fetch('submit_order.php').then(function (result){
+           return result.json();
+       }).then (function (orders){
+           if (orders.length == 0){
+               staffView.innerHTML= `<p> No orders to show </p>`
+               return;
+           }
+       })
+        // write data as a list on the screen
+        let orderList = `<h3> All Orders: </h3> <ul>`;
+       for (let index = 0; index < orders.length; index++){
+           orderList += `<li id= "order` + order.order_number + `">` +
+               'Order ' + order.order_number + ':' + order.customer_name + ',' +
+               order.customer_drink + ',' + order.drink_milk + ',' + order.drink_extras
+               + "<button onclick = 'finishOrder(" + order.order_number+")'> Finish Order </button>" +
+               "</li>";
 
+       }
+        orderList += "</ul>";
+       staffView.innerHTML = orderList;
+    }
+    function completeOrders(orderNumber){
+        fetch("submit_order.php",{
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({action: "complete", order_number: orderNumber})
+        })
+            .then (function (result){
+                return result.json();
+            }) .then (function (response){
+                if (response.status == "completed"){
+                    let list = document.getElementById("order" + orderNumber);
+                    if (list) list.parentNode.removeChild(list);
+                }
+        });
 
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 
