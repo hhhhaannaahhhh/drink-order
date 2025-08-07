@@ -6,7 +6,8 @@ $dbname ="cs25320_24_25_haf31";
 $user = "haf31";
 $password = "Ilovestanley5#5";
 // read json sent and turn it into data
-$data = json_decode(file_get_contents("php://input"), true);
+$raw = file_get_contents('php://input');
+$data = json_decode($raw, true);
 
 $name = $data['name'];
 $drink = $data['drink'];
@@ -18,7 +19,7 @@ if (isset($data['extras'])) {
     $extras = '';
 }
 // connect to database
-$conn_string ="host = $host dbname=$dbname user=$user password=$password";
+$conn_string = "host=$host dbname=$dbname user=$user password=$password";
 $db =pg_connect($conn_string);
 $sql = "INSERT INTO orders (customer_name, customer_drink, drink_milk, drink_extras, order_finished)
 VALUES ($1, $2, $3, $4, FALSE)";
@@ -30,3 +31,4 @@ if ($result){
     ]);
 }
 pg_close($db);
+?>

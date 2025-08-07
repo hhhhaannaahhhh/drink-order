@@ -17,7 +17,7 @@
 <div id = "orderSum">
     <h3> Your order:</h3>
 </div>
-<button id="submitOrder">Submit Order</button>
+<button id="submitOrder" type="button">Submit Order</button>
 <script>
     //constants for the canvas
     const canvas = document.getElementById("orderBox");
@@ -247,17 +247,16 @@
         });
     // submit order and send to databse
     const submitOrder = document.getElementById("submitOrder");
+    submitOrder.addEventListener("click",submitOrderButton);
     // send order to php to add to database
     function submitOrderButton(){
+        addOrderSum();
         fetch("submit_order.php",{
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(orderList)
         });
     }
-    submitOrder.addEventListener("click",submitOrderButton);
 
     //staff view
     const staffButton = document.getElementById("staff");
