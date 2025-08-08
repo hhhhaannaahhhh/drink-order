@@ -1,23 +1,22 @@
 <?php
+
 require 'get_db_connection.php';
 $conn = get_db_connection();
 header('Content-Type: application/json');
 
-$query = $conn->prepare("insert into orders (customer_name, customer_drink,
-                    drink_milk, drink_extras) values (:name, :drink, :milk, :extras)
-                        ");
+$name = $_POST["name"];
+$drink = $_POST["drink"];
+$milk = $_POST["milk"];
+$extras = $_POST["extras"];
+if(is_array($extras)){
+    $extras = implode(', ',$extras);
+}
 
-$query->bindParam(':name', $name);
-$query->bindParam(':drink', $drink);
-$query->bindParam(':milk', $milk);
-$query->bindParam(':extras', $extras);
+$query = "INSERT INTO orders (customer_name, customer_drink,
+                    drink_milk, drink_extras) VALUES (?, ?, ?, ?)";
+$stmt = $pdo->prepare($query);
 
-$query->execute();
-header('Content-Type: application/json');
-echo json_encode([
-    'status'=>'ok',
-    'order_number'=>(int)$query->fetch(PDO::FETCH_COLUMN)
-]);
+$stmt->execute([$name, $drink, $milk, $extras]);
 
 $query = null;
 $conn = null;

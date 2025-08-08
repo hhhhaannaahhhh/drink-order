@@ -7,15 +7,18 @@
 </head>
 <body>
 <h1>What drink would you like?</h1>
-<form>
+<form id="orderForm"action="submit_order.php" method="post">
     <p id="whatsYourName"> What's your name?</p>
     <input type="text" id="userName" placeholder="Hannah">
+    <input type="hidden" id="submitDrink" name="drink">
+    <input type="hidden" id="submitMilk" name="milk">
+    <input type="hidden" id="submitExtra" name="extras">
+    <button id="submitOrder">Submit Order</button>
 </form>
 <canvas id="orderBox" width="500" height="300"></canvas>
 <div id = "orderSum">
     <h3> Your order:</h3>
 </div>
-<button id="submitOrder" type="button">Submit Order</button>
 <script>
     //constants for the canvas
     const canvas = document.getElementById("orderBox");
@@ -79,6 +82,7 @@
         }
         html += `</ul>`;
         orderSum.innerHTML = html;
+        submitOrderButton();
 
     }
 
@@ -247,27 +251,11 @@
     const submitOrder = document.getElementById("submitOrder");
     submitOrder.addEventListener("click",submitOrderButton);
     // send order to php to add to database
-   async function submitOrderButton(){
-        addOrderSum();
-        const params = new URLSearchParams({
-            name: orderList.name,
-            drink: orderList.drink,
-            milk: orderList.milk,
-            extras: orderList.extras.join(', ')
-        });
-
-        const response = await fetch(`submit_order.php?${params}`,{
-        method: 'GET'
-        });
-        if (response.ok) {
-            const data = await response.json();
-            if (data.status === 'ok'){
-                alert("Thank you for your order");
-            } else {
-                alert("We can't take your order at this time");
-            }
-        }
-    }
+   async function submitOrderButton() {
+       document.getElementById("submitDrink").value = orderList.drink;
+       document.getElementById("submitMilk").value = orderList.milk;
+       document.getElementById("submitExtra").value = orderList.extras
+   }
 
 
 
