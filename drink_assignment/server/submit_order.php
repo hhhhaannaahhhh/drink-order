@@ -10,7 +10,7 @@ $milk = $_POST["milk"];
 $extras = $_POST["extras"];
 try {
     $query = "INSERT INTO orders (customer_name, customer_drink,
-                    drink_milk, drink_extras) VALUES (?, ?, ?, ?)";
+                    drink_milk, drink_extras) VALUES ($name, $drink, $milk, $extras)";
     $stmt = $pdo->prepare($query);
 
     $stmt->execute([$name, $drink, $milk, $extras]);
