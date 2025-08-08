@@ -32,7 +32,8 @@ W3Schools (n.d.). SQL Data Types for MySQL, SQL Server, and MS Access. [online] 
 w3schools (2019). PHP: MySQL Database. [online] W3schools.com. Available at: https://www.w3schools.com/php/php_mysql_intro.asp.
 www.w3schools.com. (n.d.). PHP isset() Function. [online] Available at: https://www.w3schools.com/php/func_var_isset.asp.
 W3Schools (n.d.). JavaScript Promises. [online] www.w3schools.com. Available at: https://www.w3schools.com/js/js_promise.asp.
-www.youtube.com. (n.d.). 22 | INSERT INTO Database Using PHP From Your Website! | 2023 | Learn PHP Full Course for Beginners. [online] Available at: https://www.youtube.com/watch?v=IagGGcC95Ig.
+www.youtube.com. (n.d.). 22 | INSERT INTO Database Using PHP From Your Website! | 2023 | Learn PHP Full Course for Beginners. [online] Available at: https://www.youtube.com/watch?v=IagGGcC95Ig.  
+When frustrated with writing the php I did try to have AI help me yet deleted this when I found it was not helpful and instead followed the lectures and a youtube video on it
 
 ‌
 ‌
