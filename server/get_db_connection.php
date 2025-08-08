@@ -1,5 +1,5 @@
 <?php
-require 'M:\Users\haf31\secret\db_secret.php';
+require 'C:\Users\haf31\secret\db_secret.php';
 function get_db_cnnection(){
     $data_source_name = DB_DRIVER.":host=".DB_HOST.";dbname=".DB_NAME;
     try{
