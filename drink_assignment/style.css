@@ -1,5 +1,5 @@
 body {
-    font: "Verdana";
+    font-family: sans-serif;
     background:#ffe4b5;
 
 }
@@ -13,6 +13,6 @@ canvas{
 }
 #orderSum {
     border: 2px black;
-    font: "Verdana";
+    font-family: sans-serif;
     color: black;
 }

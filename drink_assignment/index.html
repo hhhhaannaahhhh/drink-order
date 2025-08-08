@@ -113,7 +113,7 @@
         milkImg.onload = function(){
             imageLoaded++;
             if (imageLoaded === milks.length){
-                milkImg();
+                milkExtras();
             }
         }
     });
@@ -146,7 +146,7 @@
         extraImg.onload = function(){
             imageLoaded++;
             if (imageLoaded === extras.length) {
-                extraImg();
+                drinkExtra();
             }
         }
     });
@@ -179,7 +179,7 @@
         smoothieExtraImg.onload = function(){
             imageLoaded++;
             if (imageLoaded === smoothieExtras.length){
-                smoothieExtraImg();
+                smoothieExtras();
             }
         }
     });
@@ -193,7 +193,7 @@
         const rect = canvas.getBoundingClientRect(); //figure out canvas location
         const clickX = event.clientX - rect.left;
         const clickY = event.clientY - rect.top;
-        if (currentScreen == "drinks") {
+        if (currentScreen === "drinks") {
         drinks.forEach(function (drink) {
             if (
                 clickX >= drink.x && clickX <= drink.x + 80 &&
@@ -205,7 +205,7 @@
                 milkExtras();
             }
         });
-    } else if (currentScreen == "milks") {
+    } else if (currentScreen === "milks") {
             milks.forEach(function (milk){
                 if (
                     clickX >= milk.x && clickX <= milk.x + 80 &&
@@ -224,7 +224,7 @@
 
                 }
             });
-        }  else if (currentScreen == "extras") {
+        }  else if (currentScreen === "extras") {
             extras.forEach(function (extra) {
                 if (
                     clickX >= extra.x && clickX <= extra.x + 80 &&
@@ -234,7 +234,7 @@
                     addOrderSum();
                 }
             });
-        } else if (currentScreen == "smoothie"){
+        } else if (currentScreen === "smoothie"){
             smoothies.forEach(function (smoothieExtra){
                 if (
                     clickX >= smoothieExtra.x && clickX <= smoothieExtra.x + 80 &&

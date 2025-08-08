@@ -17,7 +17,35 @@ Was not able to implement staff view however I would've had a staff button at th
 all un-fufilled orders and lets the staff mark them as completed. Once completed the order will then be removed from the database. 
 
 ## Project link 
-https://users.aber.ac.uk/haf31/drink_assignment
+(messed up with the files which is why its repetitive)
+https://users.aber.ac.uk/haf31/drink_assignment/drink_assignment/drink_assignment
+
+## Installation and Run
+### Need to have  
+IntelliJ IDE with PHP, PDO, and PostgresSQL  
+PostgresSQL database hosted at db.dcs.aber.ac.uk  
+Apache web server with users public_html enabled 
+Git to clone the repo  
+### Clone the repo  
+In Git, fork the repository, then go to code and copy that link  
+Then in Terminal head to a xxx@central.aber.ac.uk with xxx being your username  
+Then change the directory to your public_html by typing in cd ~/public_html  
+Once that is done type git clone and that link to save the repo to your public html 
+After cloning you should be able to see all files
+### Database  
+Create the orders table if not already present  
+CREATE TABLE orders (
+order_number SERIAL PRIMRY KEY,
+customer_name VARCHAR(100),
+customer_drink VARCHAR(100),
+drink_milk VARCHAR(100),
+drink_extras TEXT,
+order_finished BOOLEAN DEFAULT FALSE 
+);  
+Open up get_db_connection.php and verify the connection settings and make them match your own  
+Check that all files have the correct permissions so Apache can read them properly  
+
+
 
 ## References  
 For assets: Looked up reference images of pixel art but made the art myself using an app called Pixel Studio on Steam  
