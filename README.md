@@ -13,7 +13,7 @@ see their order as text under the canvas then submit it to a PostgreSQL database
 5. See "Your order" update in real time based on what you choose 
 6. Click on Submit order, your order should then be saved to the database and you should see an alert saying thank you.
 
-Was not able to implement staff view however I would've had a staff button at the top of the page when clicked calls from the database to show  
+Was not able to implement staff view however I would've had a staff button at the top of the page when clicked calls from the database to show 
 all un-fufilled orders and lets the staff mark them as completed. Once completed the order will then be removed from the database. 
 
 ## Project link 
@@ -32,7 +32,9 @@ W3Schools (n.d.). SQL Data Types for MySQL, SQL Server, and MS Access. [online] 
 w3schools (2019). PHP: MySQL Database. [online] W3schools.com. Available at: https://www.w3schools.com/php/php_mysql_intro.asp.
 www.w3schools.com. (n.d.). PHP isset() Function. [online] Available at: https://www.w3schools.com/php/func_var_isset.asp.
 W3Schools (n.d.). JavaScript Promises. [online] www.w3schools.com. Available at: https://www.w3schools.com/js/js_promise.asp.
+www.youtube.com. (n.d.). 22 | INSERT INTO Database Using PHP From Your Website! | 2023 | Learn PHP Full Course for Beginners. [online] Available at: https://www.youtube.com/watch?v=IagGGcC95Ig.
 
+‌
 ‌
 ‌
 ‌
