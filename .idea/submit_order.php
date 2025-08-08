@@ -1,43 +1,41 @@
 <?php
+
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+header('Content-Type: application/json');
+$name   = isset($_GET['name'])   ? trim($_GET['name'])   : '';
+$drink  = isset($_GET['drink'])  ? trim($_GET['drink'])  : '';
+$milk   = isset($_GET['milk'])   ? trim($_GET['milk'])   : '';
+$extras = isset($_GET['extras']) ? trim($_GET['extras']) : '';
 require 'get_db_connection.php';
 $conn = get_db_connection();
-
-$input = json_decode(file_get_contents('php://input'), true);
-$name = $input['name'];
-$drink = $input['drink'];
-$milk = $input['milk'];
-$extras = implode(', ', $input['extras']);
-
-$query = $conn->prepare("INSERT INTO orders (customer_name, customer_drink,
-                    drink_milk, drink_extras) VALUES (:name, :drink, :milk, :extrs)
-                    RETURNING order_number");
-
-$query->bindParam(':name', $name);
-$query->bindParam(':drink', $drink);
-$query->bindParam(':milk', $milk);
-$query->bindParam(':extras', $extras);
-
 try {
-    $query->execute();
-    $order_number = $query->getch(PDO::FETCH_COLUMN);
-    echo json_encode([
-        'status'=>'good',
-        'order_number'=> $order_number
+    $stmt = $conn->prepare(
+        "INSERT INTO orders
+           (customer_name, customer_drink, drink_milk, drink_extras)
+         VALUES
+           (:name, :drink, :milk, :extras)
+         RETURNING order_number"
+    );
+    $stmt->execute([
+        ':name'   => $name,
+        ':drink'  => $drink,
+        ':milk'   => $milk,
+        ':extras' => $extras
     ]);
-} catch (PDOException $e){
+    $order_number = (int)$stmt->fetchColumn();
     echo json_encode([
-        'status'=>'error',
-        'message'=>'failed'
+        'status'       => 'ok',
+        'order_number' => $order_number
     ]);
-
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode([
+        'status'  => 'error',
+        'message' => 'Insert failed: '.$e->getMessage()
+    ]);
 }
-$query = null;
-$conn = null;
+$stmt = null;
 
-
-
-
-
-
-
-?>
+$conn  = null;

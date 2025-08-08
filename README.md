@@ -2,23 +2,42 @@
 Author: Hannah Frick (haf31)
 
 ## Description
-This software is meant to mimic ordering a drink as you would at a coffee shop!  
-Start by entering your name into the name slot and choosing a drink base such as
-a drip coffee, latte, tea, or smoothie.  
-Next choose the extras! The options can be between hot or iced, different milk alternatives,
-and different flavours.  
-Depending on the drink clicked a different option will show. For example, if a smoothie is picked it will only
-show different milk alts and for the flavours it will be fruit. 
+This coffee shop system lets a user build a drink order by choosing choice of drink, milk, and extras on an HTML5 canvas UI,  
+see their order as text under the canvas then submit it to a PostgreSQL database.
 
 ## How to use 
-When the page is first opened the user should type their name into the name field. After wring DO NOT hit Enter. Just click the drink.  
-The user will also be shown the drink options, to select a drink right click on whatever the user fancies.  
-Once the user selects a drink they will then be taken to the milk options, the user can then right click on what milk they fancy.  
-After the milk is selected the page will then show a selection of extras the user can add to the drink of their choice. 
-While the user is selecting their order, text will appear showing the order back to them below the order box.  
+1. Enter your name in the form box above the canvas. DO NOT HIT ENTER. Just proceed to click your drink.
+2. Click on the drink image. The options are Coffee, Latte, Smoothie, or Tea
+3. Choose which milk you'd like. The options are Whole, Oat, and Almond
+4. Now pick as many extras as you'd like. You can choose between hot or iced, and different flavour options. Different fruit flavors will show for smoothie
+5. See "Your order" update in real time based on what you choose 
+6. Click on Submit order, your order should then be saved to the database and you should see an alert saying thank you.
+
+Was not able to implement staff view however I would've had a staff button at the top of the page when clicked calls from the database to show  
+all un-fufilled orders and lets the staff mark them as completed. Once completed the order will then be removed from the database. 
+
+## Project link 
+https://users.aber.ac.uk/haf31/drink_assignment
 
 ## References  
 For assets: Looked up reference images of pixel art but made the art myself using an app called Pixel Studio on Steam  
+CS25320 Practical Session 5 Slides
+w3schools (2019). JavaScript Introduction. [online] W3schools.com. Available at: https://www.w3schools.com/js/js_intro.asp.
+W3schools.com. (2025). W3Schools.com. [online] Available at: https://www.w3schools.com/graphics/canvas_images.asp [Accessed 8 Aug. 2025].
+W3Schools (2019). JavaScript Events. [online] W3schools.com. Available at: https://www.w3schools.com/js/js_events.asp.
+Dionysia Lemonaki (2022). Text Box in HTML – The Input Field HTML Tag. [online] freeCodeCamp.org. Available at: https://www.freecodecamp.org/news/text-box-in-html-the-input-field-html-tag/.
+W3Schools (n.d.). JavaScript DOM EventListener. [online] www.w3schools.com. Available at: https://www.w3schools.com/js/js_htmldom_eventlistener.asp.
+w3schools (2019). JavaScript if else else if. [online] W3schools.com. Available at: https://www.w3schools.com/js/js_if_else.asp.
+W3Schools (n.d.). SQL Data Types for MySQL, SQL Server, and MS Access. [online] W3schools. Available at: https://www.w3schools.com/sql/sql_datatypes.asp.
+w3schools (2019). PHP: MySQL Database. [online] W3schools.com. Available at: https://www.w3schools.com/php/php_mysql_intro.asp.
+www.w3schools.com. (n.d.). PHP isset() Function. [online] Available at: https://www.w3schools.com/php/func_var_isset.asp.
+W3Schools (n.d.). JavaScript Promises. [online] www.w3schools.com. Available at: https://www.w3schools.com/js/js_promise.asp.
+
+‌
+‌
+‌
+
+
 
 
 
